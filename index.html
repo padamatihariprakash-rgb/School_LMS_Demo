@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Lead Management System</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Mock Data -->
+    <script src="js/mockData.js" defer></script>
+    <!-- App Logic -->
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-container" class="login-wrapper">
+        <div class="login-card">
+            <div class="logo justify-center">
+                <i class="ph-fill ph-graduation-cap logo-icon"></i>
+                <span>EduLead CRM</span>
+            </div>
+            <h2>Welcome Back</h2>
+            <p class="login-subtitle">Sign in to your account</p>
+            
+            <div class="login-error hidden" id="login-error">Invalid username or password</div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" placeholder="Username (admin or caller)" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Password (admin123 or caller123)" required>
+                </div>
+                <button type="submit" class="btn-primary login-btn">Sign In</button>
+            </form>
+            
+            <div class="demo-credentials">
+                <strong>Demo Credentials:</strong><br>
+                Management: <code>admin</code> / <code>admin123</code><br>
+                Telecaller: <code>caller</code> / <code>caller123</code>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP SCREEN (Hidden by default) -->
+    <div id="app-container" class="app-container hidden">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="ph-fill ph-graduation-cap logo-icon"></i>
+                <span>EduLead</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <p class="nav-label">MAIN</p>
+                <!-- Nav items generated via JS depending on role -->
+            </nav>
+
+            <div class="bottom-menu">
+                <a href="#" id="btn-logout" class="nav-item text-danger" style="margin-top:auto;">
+                    <i class="ph ph-sign-out"></i> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-search">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" placeholder="Search leads, campaigns...">
+                </div>
+                <div class="header-actions">
+                    <div class="notification-wrap tooltip">
+                        <i class="ph ph-bell"></i>
+                        <span class="badge">3</span>
+                        <div class="tooltip-text">Automated Follow-ups Pending</div>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Profile" id="header-avatar">
+                        <div class="user-info">
+                            <span class="user-name" id="header-username">System User</span>
+                            <span class="user-role" id="header-role">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dynamic Views Container -->
+            <div id="view-container" class="view-container">
+                <!-- Content injected by app.js -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Call Simulator Modal -->
+    <div id="call-modal" class="modal-overlay hidden">
+        <div class="modal-content call-simulator">
+            <div class="call-header">
+                <div class="caller-info">
+                    <img src="https://i.pravatar.cc/150?img=5" id="call-avatar" alt="Lead">
+                    <div>
+                        <h3 id="call-name">John Doe</h3>
+                        <p class="phone-number" id="call-phone">+1 (555) 019-8237</p>
+                    </div>
+                </div>
+                <div class="call-source-badge" id="call-source"><i class="ph-fill ph-meta-logo"></i> Meta</div>
+            </div>
+            
+            <div class="call-status-display">
+                <div class="pulsing-circle"></div>
+                <h2 id="call-timer">00:00</h2>
+                <p>Call in progress...</p>
+            </div>
+
+            <div class="call-script-section">
+                <h4>Suggested Script</h4>
+                <p>Hello, am I speaking with <span id="script-name">John</span>? This is <span id="script-caller-name">our team</span> from EduLead Academy. We received your inquiry on <b id="script-source">Meta</b> regarding admissions. How can I help you today?</p>
+            </div>
+
+            <div class="call-actions">
+                <button class="btn-icon danger tooltip" id="btn-end-call">
+                    <i class="ph-fill ph-phone-disconnect"></i>
+                    <span class="tooltip-text">End Call</span>
+                </button>
+                <button class="btn-icon secondary tooltip">
+                    <i class="ph-fill ph-microphone-slash"></i>
+                    <span class="tooltip-text">Mute</span>
+                </button>
+                <button class="btn-icon secondary tooltip">
+                    <i class="ph-fill ph-pause"></i>
+                    <span class="tooltip-text">Hold</span>
+                </button>
+            </div>
+            
+            <!-- Post Call Wrap Up -->
+            <div id="post-call-wrap" class="post-call-wrap hidden">
+                <h4>Call Wrap-up</h4>
+                <select id="lead-status-select" class="custom-select">
+                    <option value="" disabled selected>Update Lead Status</option>
+                    <option value="Interested">Interested - Send Brochure</option>
+                    <option value="Follow Up">Follow Up Needed</option>
+                    <option value="Not Interested">Not Interested</option>
+                    <option value="Admitted">Admitted</option>
+                </select>
+                <button class="btn-primary" id="btn-save-call">Save & Close</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
