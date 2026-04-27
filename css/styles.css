@@ -825,3 +825,82 @@ tr:hover td {
 }
 .demo-credentials code { color: var(--accent-primary); font-family: monospace; }
 .justify-center { justify-content: center; }
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 28px;
+    cursor: pointer;
+    display: none;
+    margin-right: 16px;
+}
+
+/* Overlay for Sidebar */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .header-search { display: none; }
+}
+
+@media (max-width: 768px) {
+    /* Hide sidebar, make it flyout */
+    .sidebar {
+        position: fixed;
+        left: -260px;
+        top: 0;
+        height: 100%;
+        z-index: 100;
+        box-shadow: var(--shadow-soft);
+    }
+    .sidebar.open {
+        left: 0;
+    }
+    
+    .mobile-menu-btn { display: block; }
+    
+    .top-header { padding: 0 20px; }
+    .view-container { padding: 20px; }
+    
+    .stats-grid { grid-template-columns: 1fr; gap: 16px; }
+    
+    /* Tables need horizontal scroll */
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+    table { min-width: 800px; }
+    
+    /* Login Screen */
+    .login-card { margin: 20px; padding: 24px; }
+    
+    /* Call Simulator Modal */
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+    .call-status-display h2 { font-size: 32px; }
+    .pulsing-circle { width: 100px; height: 100px; }
+    .call-actions { gap: 16px; }
+    .btn-icon.danger, .btn-icon.secondary { width: 44px; height: 44px; font-size: 20px; }
+}
+

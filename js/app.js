@@ -12,6 +12,9 @@ const btnLogout = document.getElementById('btn-logout');
 
 const viewContainer = document.getElementById('view-container');
 const navMenu = document.querySelector('.nav-menu');
+const sidebar = document.querySelector('.sidebar');
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
 
 const headerUsername = document.getElementById('header-username');
 const headerRole = document.getElementById('header-role');
@@ -116,11 +119,30 @@ function generateNavMenu() {
             target.classList.add('active');
             currentView = target.dataset.view;
             renderView();
+            
+            // Close mobile menu if open
+            if(sidebar) sidebar.classList.remove('open');
+            if(sidebarOverlay) sidebarOverlay.classList.remove('active');
         });
     });
 }
 
 function setupAppListeners() {
+    // Mobile Menu Actions
+    if(mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            sidebarOverlay.classList.add('active');
+        });
+    }
+
+    if(sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+        });
+    }
+
     // Call Modal Actions
     btnEndCall.addEventListener('click', () => {
         clearInterval(callInterval);
